@@ -4,8 +4,8 @@ import Node from "../Node/node";
 
 import "./pathFind.css";
 
-const columns=5;
-const rows=5
+const columns=50;
+const rows=22;
 
 const PathFind=()=>{
     const[Grid,setGrid]=useState([]);
@@ -15,17 +15,17 @@ const PathFind=()=>{
 
 //creates grid
     const initializeGrid=()=>{
-        const grid=new Array(columns);
-        for(let i=0;i<columns;i++){
-            grid[i]=new Array(rows);
+        const grid=new Array(rows);
+        for(let i=0;i<rows;i++){
+            grid[i]=new Array(columns);
         }
         createSpot(grid);
         setGrid(grid);
     };
     //creates spot
     const createSpot=(grid)=>{
-        for(let i=0;i<columns;i++){
-            for(let j=0;j<rows;j++){
+        for(let i=0;i<rows;i++){
+            for(let j=0;j<columns;j++){
                 grid[i][j]=new Spot(i,j);
             }
         }
