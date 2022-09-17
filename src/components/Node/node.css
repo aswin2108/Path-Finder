@@ -1,6 +1,22 @@
 .node{
     width:25px;
     height:25px;
-    border: 0.01px dotted rgba(252, 249, 249, 0.397);
-    
+    border: 0.1px dotted rgba(252, 249, 249, 0.397);
+}
+@keyframes color {
+    0%   { background: #33CCCC; }
+    20%  { background: #33CC36; }
+    40%  { background: #B8CC33; }
+    50%   { background: red; }
+    60%  { background: #FCCA00; }
+    80%  { background: #33CC36; }
+    100% { background: #33CCCC; }
+  }
+.node-start{
+    background: #33CCCC; /* Fallback */
+    animation: color 9s infinite linear;
+}
+.node-end{
+    background-color: rgba(87,111,230,1);
+   
 }
