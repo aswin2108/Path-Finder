@@ -96,7 +96,7 @@ const PathFind=()=>{
     ); 
     return(
     <div className="wrapper">
-     <h1 className="header">PathFind component</h1>
+     <h1 className="header">Path Finding Algorithm Visualiser</h1>
      {gridWithNode}
     </div>
     );
