@@ -17,7 +17,7 @@
     animation: color 9s infinite linear;
 }
 .node-end{
-    background-color: rgba(87,111,230,1);
+    background-color: rgb(242, 8, 8);
    
 }
 .isWall{
@@ -71,16 +71,16 @@
   @keyframes shortestPath {
     0% {
       transform: scale(0.6);
-      background-color: aquamarine;
+      background-color: rgb(234, 16, 37);
     }
   
     50% {
       transform: scale(1.2);
-      background-color: aquamarine;
+      background-color: rgb(194, 206, 17);
     }
   
     100% {
       transform: scale(1);
-      background-color: aquamarine;
+      background-color: rgb(17, 23, 221);
     }
   }

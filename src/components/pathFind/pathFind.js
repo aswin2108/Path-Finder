@@ -8,10 +8,10 @@ import "./pathFind.css";
 const columns=50;
 const rows=22;
 
-const NODE_START_ROW=10;
-const NODE_START_COLUMN=5;
+const NODE_START_ROW=2;
+const NODE_START_COLUMN=2;
 const NODE_END_ROW=10;
-const NODE_END_COLUMMN=44;
+const NODE_END_COLUMMN=48;
 
 const PathFind=()=>{
     const[Grid,setGrid]=useState([]);
