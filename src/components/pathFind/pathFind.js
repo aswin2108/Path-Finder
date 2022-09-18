@@ -15,6 +15,9 @@ const NODE_END_COLUMMN=44;
 
 const PathFind=()=>{
     const[Grid,setGrid]=useState([]);
+    const [resultingPath,setPath]=useState([]);
+    const[VisitedNodes, setVisitedNodes] = useState([]);
+
     useEffect(()=>{
         initializeGrid();
     },[]);
@@ -31,7 +34,11 @@ const PathFind=()=>{
 
         const startNode=grid[NODE_START_ROW][NODE_START_COLUMN]
         const endNode=grid[NODE_END_ROW][NODE_END_COLUMMN]
-        Astar(startNode,endNode);
+        let resultingPath = Astar(startNode,endNode);
+        startNode.isWall=false;
+        endNode.isWall=false;
+        setPath(resultingPath.resultingPath);
+        setVisitedNodes(resultingPath.visitedNodes);
     };
     //creates spot
     const createSpot=(grid)=>{
@@ -64,7 +71,10 @@ const PathFind=()=>{
         this.neighbours=[];
         //Used to recreate the path. The optimum points are stored here
         this.previous=undefined;
-
+        this.isWall=false;
+        if(Math.random(1)<0.2){
+            this.isWall=true;
+        }
         this.addneighbours=function(grid){
             i=this.x;
             j=this.y;
@@ -84,9 +94,9 @@ const PathFind=()=>{
             return(
                 <div key={rowIndex} className="rowWrapper">
                 {row.map((columns,colIndex)=>{
-                    const{isStart,isEnd}=columns
+                    const{isStart,isEnd, isWall}=columns
                     return(
-                        <Node key={colIndex} isStart={isStart} isEnd={isEnd} row={rowIndex} col={colIndex}/>
+                        <Node key={colIndex} isStart={isStart} isEnd={isEnd} row={rowIndex} col={colIndex} isWall={isWall}/>
                     )
                 })}
                 </div>
@@ -94,11 +104,43 @@ const PathFind=()=>{
           })}
         </div>
     ); 
+
+    const visualizeShortPath=(shortestPath)=>{
+        for(let i=0;i<shortestPath.length;i++){
+            setTimeout(()=>{
+                const node=shortestPath[i];
+                document.getElementById(`node-${node.x}-${node.y}`).className=
+                "node node-shortest-path";
+            },10*i);
+        }
+    };
+
+    const visualizePath=()=>{
+        for(let i=0;i<=VisitedNodes.length;i++){
+            
+            if(i===VisitedNodes.length){
+                setTimeout(()=>{
+                    visualizeShortPath(resultingPath);
+                },20*i);
+            }
+            else{
+                setTimeout(()=>{
+                    const node=VisitedNodes[i];
+                if(VisitedNodes[i].x!== NODE_START_ROW || VisitedNodes[i].y!== NODE_START_COLUMN)
+                document.getElementById(`node-${node.x}-${node.y}`).className=
+                "node node-visited"
+                },20*i)
+            }
+        }
+    }; 
+    console.log(resultingPath);
     return(
     <div className="wrapper">
      <h1 className="header">Path Finding Algorithm Visualiser</h1>
+     <button class="button-85" onClick={visualizePath}>Visualize path</button>
      {gridWithNode}
     </div>
     );
 }
 export default PathFind;
+
